@@ -18,8 +18,8 @@
  */
 package com.infomata.data.junit;
 
-import java.text.DecimalFormat;
 import com.infomata.data.*;
+import net.starschema.java.util.DecimalFormatUtil;
 
 /**
  * Test for CSVFormat
@@ -39,7 +39,9 @@ public class CsvFormatTest extends DataFormatUT {
         row.add(null);
         row.add("");
         String val = fmt.format(row);
-        assertEquals("12.5,null,", val);
+
+
+        assertEquals( DecimalFormatUtil.getDecimalFormatted("12.5") + ",null,", val);
     }
 
     public void testTextWithNewLine() {
@@ -59,17 +61,28 @@ public class CsvFormatTest extends DataFormatUT {
     }
 
     public void testNumericParse() {
-        DataRow row = fmt.parseLine("1.2,3,5.7865,123");
+        DataRow row = fmt.parseLine( createNumericParseRow("", "") );
         applyNumericAssertions(row);
     }
 
+    private String createNumericParseRow(String leadSpace, String lastSpace) {
+        return leadSpace +
+                DecimalFormatUtil.getDecimalFormatted("1.2") +
+                ",3," +
+                DecimalFormatUtil.getDecimalFormatted("5.7865") +
+                "," + lastSpace + "123";
+    }
+
     public void testNumericParseWithLeadingSpace() {
-        DataRow row = fmt.parseLine(" 1.2,3,5.7865, 123");
+        DataRow row = fmt.parseLine( createNumericParseRow(" ", " ") );
         applyNumericAssertions(row);
     }
 
     public void testFormatting() {
-        DataRow row = new DataRow(new DecimalFormat("####0.#######"));
+
+        // The decimal format symbol may differ for specific locales (like in hungarian)
+
+        DataRow row = new DataRow(DecimalFormatUtil.createDecimalFormat("####0.#######", '.'));
         row.add(1.2d);
         row.add(3);
         row.add(5.7865d);

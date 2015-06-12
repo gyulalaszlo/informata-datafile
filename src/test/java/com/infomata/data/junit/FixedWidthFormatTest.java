@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 
 import com.infomata.data.DataRow;
 import com.infomata.data.FixedWidthFormat;
+import net.starschema.java.util.DecimalFormatUtil;
 
 /**
  * FixedWidthFormatTest.java
@@ -23,16 +24,22 @@ public class FixedWidthFormatTest extends DataFormatUT {
     protected void setUp() {
         fmt = new FixedWidthFormat(new int[] {7, 7, 7, 7, 7});
     }
-    
+
+
     public void testNumericParse() {
         //                           ^234567^234567^234567^234567
-        DataRow row = fmt.parseLine("1.2    3      5.7865 123    ");
+        DataRow row = fmt.parseLine(decimal("1.2") +
+                "    3      " + decimal("5.7865") + " 123    ");
         applyNumericAssertions(row);
+    }
+
+    private String decimal(String englishFormat) {
+        return DecimalFormatUtil.getDecimalFormattedNoQuote(englishFormat);
     }
 
     public void testLeadingSpace() {
         //                           ^234567^234567^234567^234567
-        DataRow row = fmt.parseLine(" 1.2    3      5.7865 123   ");
+        DataRow row = fmt.parseLine(" " + decimal("1.2") + "    3      " + decimal("5.7865") + " 123   ");
         applyNumericAssertions(row);
     }
 
@@ -45,7 +52,7 @@ public class FixedWidthFormatTest extends DataFormatUT {
         String res = fmt.format(row);
         // System.out.println("      :  ^234567^234567^234567^234567");
         // System.out.println("result: '" + res + "'");
-        assertEquals("1.2    3      5.7865 123    ", res);
+        assertEquals(decimal("1.2") + "    3      " + decimal("5.7865") + " 123    ", res);
     }
     
 } // FixedWidthFormatTest

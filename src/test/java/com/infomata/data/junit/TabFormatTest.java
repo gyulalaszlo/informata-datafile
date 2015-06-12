@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import com.infomata.data.DataFormat;
 import com.infomata.data.DataRow;
 import com.infomata.data.TabFormat;
+import net.starschema.java.util.DecimalFormatUtil;
 
 /**
  * TabFormatTest.java
@@ -23,17 +24,22 @@ public class TabFormatTest extends DataFormatUT {
 
     private DataFormat fmt = null;
 
+    private String decimal(String englishFormat) {
+        return DecimalFormatUtil.getDecimalFormattedNoQuote(englishFormat);
+    }
+
     protected void setUp() {
         fmt = new TabFormat();
     }
     
     public void testNumericParse() {
-        DataRow row = fmt.parseLine("1.2\t3\t5.7865\t123");
+        DataRow row = fmt.parseLine( decimal("1.2") + "\t3\t" + decimal("5.7865") + "\t123");
         applyNumericAssertions(row);
     }
 
     public void testLeadingSpace() {
-        DataRow row = fmt.parseLine("1.2\t 3\t 5.7865\t123");
+        DataRow row = fmt.parseLine( decimal("1.2") + "\t3\t " + decimal("5.7865") + "\t123");
+//        DataRow row = fmt.parseLine("1.2\t 3\t 5.7865\t123");
         applyNumericAssertions(row);
     }
 
@@ -45,7 +51,7 @@ public class TabFormatTest extends DataFormatUT {
         row.add(123);
         row.add("Testing... one, two, three");
         String res = fmt.format(row);
-        assertEquals("1.2\t3\t5.7865\t123\tTesting... one, two, three", res);
+        assertEquals(decimal("1.2") + "\t3\t" + decimal("5.7865") + "\t123\tTesting... one, two, three", res);
     }
     
 } // TabFormatTest
