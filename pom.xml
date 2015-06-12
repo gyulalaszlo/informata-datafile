@@ -4,7 +4,7 @@
     <groupId>com.github.gyulalaszlo</groupId>
     <artifactId>informata-datafile</artifactId>
     <packaging>jar</packaging>
-    <version>1.4</version>
+    <version>1.4.1</version>
     <name>Informata DataFile</name>
     <description>
         Maven Package for datafile.sourceforge.net
