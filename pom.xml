@@ -27,10 +27,9 @@
 
     <!-- Git -->
     <scm>
-        <connection>scm:git:https://github.com/gyulalaszlo/informata-datafile.git</connection>
+        <connection>scm:git:git@github.com:gyulalaszlo/informata-datafile.git</connection>
         <developerConnection>scm:git:git@github.com:gyulalaszlo/informata-datafile.git</developerConnection>
-        <tag>HEAD</tag>
-        <url>https://github.com/gyulalaszlo/informata-datafile</url>
+        <url>git@github.com:gyulalaszlo/informata-datafile.git</url>
     </scm>
 
     <dependencies>
@@ -42,6 +41,14 @@
         </dependency>
     </dependencies>
 
+    <developers>
+        <developer>
+            <name>Gyula Laszlo</name>
+            <email>gyula.laszlo@starschema.net</email>
+            <organization>Starschema</organization>
+            <organizationUrl>http://starschema.net</organizationUrl>
+        </developer>
+    </developers>
 
     <build>
     </build>
