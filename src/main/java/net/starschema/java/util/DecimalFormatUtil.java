@@ -1,4 +1,6 @@
 /*
+ * (C) 2015 Starschema
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -19,9 +21,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 /**
- * (C) 2015 Starschema
- * All rights reserverd.
- * ---------------------
+ * Helper class for handling local-dependent decimal formats.
+ *
+ * Mainly useful for testing.
  */
 public class DecimalFormatUtil {
     /** Creates a new DecimalFormat using comming dot as a separator so local
